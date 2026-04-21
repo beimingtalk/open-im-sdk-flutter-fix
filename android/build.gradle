@@ -21,6 +21,8 @@ rootProject.allprojects {
 
 apply plugin: "com.android.library"
 
+def localCoreAar = file("${project.projectDir}/libs/open_im_sdk.aar")
+
 android {
     namespace = "io.openim.flutter_openim_sdk"
 
@@ -36,7 +38,11 @@ android {
     }
 
     dependencies {
-        implementation 'io.openim:core-sdk:3.8.3-patch12@aar'
+        if (localCoreAar.exists()) {
+            implementation files(localCoreAar)
+        } else {
+            implementation 'io.openim:core-sdk:3.8.3-patch12@aar'
+        }
         testImplementation("junit:junit:4.13.2")
         testImplementation("org.mockito:mockito-core:5.0.0")
     }

@@ -3,6 +3,7 @@
 # Run `pod lib lint flutter_openim_sdk.podspec` to validate before publishing.
 #
 Pod::Spec.new do |s|
+  local_core_xcframework = 'Framework/OpenIMCore.xcframework'
   s.name             = 'flutter_openim_sdk'
   s.version          = '0.0.1'
   s.summary          = 'A new Flutter project.'
@@ -17,11 +18,14 @@ A new Flutter project.
   s.dependency 'Flutter'
   s.platform = :ios, '11.0'
 
-  s.dependency 'OpenIMSDKCore','3.8.3-hotfix.12'
+  if File.exist?(File.join(__dir__, local_core_xcframework))
+    s.vendored_frameworks = local_core_xcframework
+  else
+    s.dependency 'OpenIMSDKCore','3.8.3-hotfix.12'
+  end
   s.static_framework = true
   s.library = 'resolv'
 
-  # s.vendored_frameworks = 'Framework/*.xcframework'
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
   s.swift_version = '5.0'

@@ -94,8 +94,7 @@ class ConversationInfo {
     showName = json['showName'];
     faceURL = json['faceURL'];
     recvMsgOpt = json['recvMsgOpt'];
-    final rawUnreadCount = json['unreadCount'];
-    unreadCount = rawUnreadCount is int ? rawUnreadCount : int.tryParse('$rawUnreadCount') ?? 0;
+    unreadCount = Utils.parseInt(json['unreadCount']);
     if (unreadCount < 0) {
       unreadCount = 0;
     }

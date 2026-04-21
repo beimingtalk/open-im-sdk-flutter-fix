@@ -960,8 +960,8 @@ class GroupHasReadInfo {
   int? unreadCount;
 
   GroupHasReadInfo.fromJson(Map<String, dynamic> json) {
-    hasReadCount = json['hasReadCount'] ?? 0;
-    unreadCount = json['unreadCount'] ?? 0;
+    hasReadCount = Utils.parseInt(json['hasReadCount']);
+    unreadCount = Utils.parseInt(json['unreadCount']);
   }
 
   Map<String, dynamic> toJson() {
